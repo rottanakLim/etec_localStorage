@@ -10,6 +10,7 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   String? _email;
+  String? _username;
   String? _password;
   @override
   void initState() {
@@ -21,6 +22,7 @@ class _HomescreenState extends State<Homescreen> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _email = prefs.getString("email");
+      _username = prefs.getString("username");
       _password = prefs.getString("password");
     });
   }
@@ -37,8 +39,38 @@ class _HomescreenState extends State<Homescreen> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Text("$_email"),
-                Text("$_password"),
+                Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Icon(Icons.person),
+                    ),
+                    title: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text("Email       : $_email"),
+                              Text("Username: $_username"),
+                              Text("Password : $_password"),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Column(
+                            children: [
+                              Text("Email       : $_email"),
+                              Text("Username: $_username"),
+                              Text("Password : $_password"),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    trailing: Icon(Icons.notifications_on),
+                  ),
+                ),
               ],
             ),
           ),
